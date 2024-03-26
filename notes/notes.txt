@@ -1,0 +1,141 @@
+<?php
+session_start();
+include "db_conn.php";
+
+// Initialize variables
+$_email;
+$_password;
+$_admin_status = 0;
+
+if (isset($_POST['email_input']) && isset($_POST['password_input'])) {
+    $_email = $_POST['email_input'];
+    $_password = $_POST['password_input'];
+    function validate($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email AND password = :pass");
+    $stmt->bindParam(':email', $_email);
+    $stmt->bindParam(':pass', $_password);
+    $stmt->execute();
+
+    // Fetch user data
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $_admin_status = $user['admin_access'];
+
+        // Store user information in a session variable
+        $_SESSION['user'] = $user;
+
+        if ($_admin_status == 1) {
+            header('location: http://localhost/Proyek%20tekweb/admin.php');
+        } else {
+            header('location: http://localhost/Proyek%20tekweb/home.php');
+        }
+    } else {
+        echo "<div class='text-center'><p>Email atau password salah</p></div>";
+    }
+}
+?>
+<!-- Rest of your HTML -->
+
+
+
+
+-- KODINGAN ASLI
+ <?php
+    session_start();
+    include "db_conn.php";
+
+    $_email;
+    $_password;
+    $_admin_status = "";
+
+    if (isset($_POST['email_input']) && isset($_POST['password_input'])) {
+        $_email = $_POST['email_input'];
+        $_password =  $_POST['password_input']; 
+        $_admin_status = 0;
+        function validate($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return data;
+        }
+    }
+
+
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email AND password = :pass");
+    $stmt->bindParam(':email', $_email);
+    $stmt->bindParam(':pass', $_password);
+    $stmt->execute();
+    $row_results = $stmt->fetchColumn();
+
+    $stmt = $pdo->prepare("SELECT admin_access FROM users WHERE email = :email AND password = :pass");
+    $stmt->bindParam(':email', $_email);
+    $stmt->bindParam(':pass', $_password);
+    $stmt->execute(); // You need to execute the query.
+    $result = $stmt->fetch(PDO::FETCH_ASSOC); // Use fetch() to retrieve a single row.
+
+    if ($result) { $_admin_status = $result['admin_access']; } 
+
+
+    if($row_results > 0) {  
+        if ($_admin_status == 1) {
+            header('location: http://localhost/Proyek%20tekweb/admin.php');   
+        } else {
+            header('location: http://localhost/Proyek%20tekweb/home.php');
+        }
+    } else {
+        echo "<div class='text-center'><p>Email atau password salah</p></div>";
+    }
+
+
+?> 
+
+
+
+
+                    echo "<button onclick='bayar(".($row['item_id']).",".$rows1['game_id'].",".$memberId.", ' ". $rows1['game_name']." ' ,". .",". .")'' class='buy-item-btn btn btn-outline-dark' type='button' data-bs-toggle='modal' data-bs-target='#buyItem'>Beli</button>";
+
+// CARA DAPET FILE PATH
+<?php
+if (isset($_POST["submit"])) {
+    $file = $_FILES["file"]; // Get the uploaded file information
+    $fileName = $file["name"];
+    $fileTmpName = $file["tmp_name"];
+    $fileSize = $file["size"];
+    $fileType = $file["type"];
+    $fileError = $file["error"];
+
+    // Check if there was no file upload error
+    if ($fileError === 0) {
+        // Define a folder where you want to store the uploaded files
+        $uploadDirectory = "uploads/";
+
+        // Create a unique filename to avoid overwriting existing files
+        $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
+        $uniqueFileName = uniqid() . "." . $fileExtension;
+        $destination = $uploadDirectory . $uniqueFileName;
+
+        // Move the uploaded file to the destination folder
+        if (move_uploaded_file($fileTmpName, $destination)) {
+            // Insert the file information into the database
+            $pdo = new PDO("mysql:host=your_host;dbname=your_database", "your_username", "your_password");
+            $stmt = $pdo->prepare("INSERT INTO files (file_name, file_path) VALUES (?, ?)");
+            if ($stmt->execute([$uniqueFileName, $destination])) {
+                echo "File uploaded and inserted into the database successfully.";
+            } else {
+                echo "Error: Failed to insert file information into the database.";
+            }
+        } else {
+            echo "Error: Failed to move the file to the destination folder.";
+        }
+    } else {
+        echo "Error: File upload error - code $fileError";
+    }
+}
+?>

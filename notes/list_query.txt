@@ -1,0 +1,5 @@
+
+
+
+-- mencari item paling laris dibeli
+SELECT g.game_name, i.item_id, i.game_id, nominal_topup, jumlah_penjualan FROM item i JOIN (SELECT item_id, COUNT(item_id) AS jumlah_penjualan FROM invoice GROUP BY item_id HAVING COUNT(item_id) = (SELECT MAX(temp.jumlah) FROM (SELECT COUNT(item_id) AS jumlah FROM invoice GROUP BY item_id) temp)) temp_table_i ON i.item_id = temp_table_i.item_id JOIN game g ON g.game_id = i.game_id;

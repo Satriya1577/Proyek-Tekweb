@@ -1,0 +1,62 @@
+   <!-- INI NANTI DIMASUKIN KE ECHO2 -->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img class="img-responsive img-fluid" src="/Proyek tekweb/assets/clash of clans/clash_of_clans_detail_image.png" alt="">
+                    </div>
+                    <h1 class="text-center mt-3 mb-3">Clash Of Clans</h1>
+                    <p>Ayo isi gems mu di website kami karena website kami paling bagus blawbelawelab</p>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <section class="py-5">
+                            <h1 class="text-center">PILIHAN RESOURCE</h1>
+                            <div class="container px-4 px-lg-5 mt-5">
+                               
+                                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                                    <div class="col mb-5">
+                                        <div class="card h-100" id="2">
+                                            <div class="thumbnail d-flex align-items-center justify-content-center">
+                                                <img class="card-img-top img-responsive img-fluid" src="/Proyek tekweb/assets/clash of clans/coc_500_gems.png" alt="">
+                                            </div>
+                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                <div class="text-center"><p class="fw-bolder">500</p></div>
+                                                <div class="text-center"><h5 class="fw-bolder">Rp. 8000</h5></div>
+                                                <div class="text-center">
+                                                    <form action="details.php">
+                                                        <!-- <a class="btn btn-outline-dark mt-auto" href="#">Learn More</a> -->
+                                                        <button onclick="bayar(2,1,4, 'clash of clans', 500, 8000)" class="buy-item-btn btn btn-outline-dark" data-member-id="4" data-game-id="1" data-item-id="2" type="button" data-bs-toggle="modal" data-bs-target="#buyItem">Beli</button>
+                                                    </form>                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col mb-5">
+                                        <div class="card h-100" id="1">
+                                            <div class="thumbnail d-flex align-items-center justify-content-center">
+                                                <img class="card-img-top img-responsive img-fluid" src="/Proyek tekweb/assets/clash of clans/coc_1000_gems.png" alt="">
+                                            </div>
+                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                <div class="text-center"><p class="fw-bolder">1000</p></div>
+                                                <div class="text-center"><h5 class="fw-bolder">Rp. 15000</h5></div>
+                                                <div class="text-center">
+                                                    <form action="details.php">
+                                                        <!-- <a class="btn btn-outline-dark mt-auto" href="#">Learn More</a> -->
+                                                        <button onclick="bayar(1,1,4)" class="buy-item-btn btn btn-outline-dark" data-member-id="4" data-game-id="1" data-item-id="1" type="button" data-bs-toggle="modal" data-bs-target="#buyItem">Beli</button>
+                                                    </form>                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
